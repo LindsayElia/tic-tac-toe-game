@@ -82,11 +82,11 @@ when computer plays:
 
 function computerWillPlay(){
 	console.log("turn count before computer plays:", turn);
-	var computerNeedsToPlay = true;
+	var computerNeedsToPlay = true;	// TO DO - clean up logic. I'm using this sometimes but not always.
 
-	// decide what tile to play on
+	// DECIDE WHAT TILE TO PLAY ON
 
-	// first play by computer
+	// first play by computer, only two choices
 	if (turn === 1){
 		// if user went in center, computer goes in lower left corner
 		// TO DO - randomize where computer goes to make game more realistic
@@ -98,47 +98,52 @@ function computerWillPlay(){
 		}
 	}
 
-	// TO DO - add more of these for when user goes in center
-	// if user has two in a row with the option to win - these options are when computer goes in center first
+	// block user if user is about to win
+		// TO DO - add more of these for when user goes in center
+			// these options are only for when computer goes in center first
+		// TO DO - more efficient way to check if user has played two 
+			// out of any three squares that make a win
+			// and to go in third square to block
 	if (turn > 2 && computerNeedsToPlay){
-		if ( (userTiles[0] === 0 && userTiles[1] === 1) ||
-			 (userTiles[0] === 1 && userTiles[1] === 0) ||
-			 (userTiles[0] === 5 && userTiles[1] === 8) ||
-			 (userTiles[0] === 8 && userTiles[1] === 5) ){
+		// don't mark this tile if it has already been marked
+		if ( (openTiles[2] !== null && userTiles[0] === 0 && userTiles[1] === 1) ||
+			 (openTiles[2] !== null && userTiles[0] === 1 && userTiles[1] === 0) ||
+			 (openTiles[2] !== null && userTiles[0] === 5 && userTiles[1] === 8) ||
+			 (openTiles[2] !== null && userTiles[0] === 8 && userTiles[1] === 5) ){
 				decision = tile2;
 		}
-		if ( (userTiles[0] === 1 && userTiles[1] === 2) ||
-		 	 (userTiles[0] === 2 && userTiles[1] === 1) ||
-		 	 (userTiles[0] === 6 && userTiles[1] === 3) ||
-		 	 (userTiles[0] === 3 && userTiles[1] === 6) ){
+		if ( (openTiles[0] !== null && userTiles[0] === 1 && userTiles[1] === 2) ||
+			 (openTiles[0] !== null && userTiles[0] === 2 && userTiles[1] === 1) ||
+			 (openTiles[0] !== null && userTiles[0] === 6 && userTiles[1] === 3) ||
+			 (openTiles[0] !== null && userTiles[0] === 3 && userTiles[1] === 6) ){
 				decision = tile0;
 		}
-		if ( (userTiles[0] === 0 && userTiles[1] === 3) ||
-			 (userTiles[0] === 3 && userTiles[1] === 0) ||
-			 (userTiles[0] === 7 && userTiles[1] === 8) ||
-			 (userTiles[0] === 8 && userTiles[1] === 7) ){
+		if ( (openTiles[6] !== null && userTiles[0] === 0 && userTiles[1] === 3) ||
+			 (openTiles[6] !== null && userTiles[0] === 3 && userTiles[1] === 0) ||
+			 (openTiles[6] !== null && userTiles[0] === 7 && userTiles[1] === 8) ||
+			 (openTiles[6] !== null && userTiles[0] === 8 && userTiles[1] === 7) ){
 				decision = tile6;
 		}
-		if ( (userTiles[0] === 2 && userTiles[1] === 5) ||
-			 (userTiles[0] === 5 && userTiles[1] === 2) ||
-			 (userTiles[0] === 6 && userTiles[1] === 7) ||
-			 (userTiles[0] === 7 && userTiles[1] === 6) ){
+		if ( (openTiles[8] !== null && userTiles[0] === 2 && userTiles[1] === 5) ||
+			 (openTiles[8] !== null && userTiles[0] === 5 && userTiles[1] === 2) ||
+			 (openTiles[8] !== null && userTiles[0] === 6 && userTiles[1] === 7) ||
+			 (openTiles[8] !== null && userTiles[0] === 7 && userTiles[1] === 6) ){
 				decision = tile8;
 		}
-		if ( (userTiles[0] === 0 && userTiles[1] === 2) ||
-			 (userTiles[0] === 2 && userTiles[1] === 0) ){
+		if ( (openTiles[1] !== null && userTiles[0] === 0 && userTiles[1] === 2) ||
+			 (openTiles[1] !== null && userTiles[0] === 2 && userTiles[1] === 0) ){
 				decision = tile1;
 		}
-		if ( (userTiles[0] === 0 && userTiles[1] === 6) ||
-			 (userTiles[0] === 6 && userTiles[1] === 0) ){
+		if ( (openTiles[3] !== null && userTiles[0] === 0 && userTiles[1] === 6) ||
+			 (openTiles[3] !== null && userTiles[0] === 6 && userTiles[1] === 0) ){
 				decision = tile3;
 		}
-		if ( (userTiles[0] === 2 && userTiles[1] === 8) ||
-			 (userTiles[0] === 8 && userTiles[1] === 2) ){
+		if ( (openTiles[5] !== null && userTiles[0] === 2 && userTiles[1] === 8) ||
+			 (openTiles[5] !== null && userTiles[0] === 8 && userTiles[1] === 2) ){
 				decision = tile5;
 		}
-		if ( (userTiles[0] === 6 && userTiles[1] === 8) ||
-			 (userTiles[0] === 8 && userTiles[1] === 6) ){
+		if ( (openTiles[7] !== null && userTiles[0] === 6 && userTiles[1] === 8) ||
+			 (openTiles[7] !== null && userTiles[0] === 8 && userTiles[1] === 6) ){
 				decision = tile7;
 		}
 
@@ -185,17 +190,33 @@ function computerWillPlay(){
 
 		} 
 		// if computer went in lower left corner
-		else { 
+		// else { 
 			// TO DO - add logic for if user went in center on first turn
-		}
+		// }
 
 	}
 
 	// TO DO - look to see if computer has two in a row with the option to win
+	if (turn > 4){
+		if (computerTiles[0] === 4 && computerTiles[1] === 0){
+			decision = tile8;
+		}
+		if (computerTiles[0] === 4 && computerTiles[1] === 2){
+			decision = tile6;
+		}
+		if (computerTiles[0] === 4 && computerTiles[1] === 8){
+			decision = tile0;
+		}
+		if (computerTiles[0] === 4 && computerTiles[1] === 6){
+			decision = tile2;
+		}
+
+	}
 
 
 
-	// once decision has been made, make changes
+	// ONCE DECISION HAS BEEN MADE,
+	// MAKE CHANGES TO BOARD
 	decision.removeEventListener("click", removeClickListener, false);
 	decision.classList.add("played");
 	decision.innerHTML = "c";
@@ -204,7 +225,7 @@ function computerWillPlay(){
 	computerTiles.push(currentTileNumber);
 	openTiles[currentTileNumber] = null;
 	console.log("computerTiles: ", computerTiles);
-	// console.log("openTiles: ", openTiles);
+	console.log("openTiles: ", openTiles);
 
 	// last thing computer does is update turn play
 	turn += 1;
