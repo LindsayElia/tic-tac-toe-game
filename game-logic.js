@@ -40,6 +40,10 @@ function removeClickListener(){
 
 
 // GAME LOGIC
+// PLEASE NOTE - currently the game only 'works' if the user plays
+// in an edge/middle square, such as tile1 or tile3,
+// and then plays one of the corner squares s next to that,
+// and then plays the edge/middle square on the other side of that corner square
 
 /* 
 when user plays:
@@ -105,7 +109,7 @@ function computerWillPlay(){
 			// out of any three squares that make a win
 			// and to go in third square to block
 	if (turn > 2 && computerNeedsToPlay){
-		// don't mark this tile if it has already been marked
+		// openTiles[2] !== null is to not mark this tile if it has already been marked
 		if ( (openTiles[2] !== null && userTiles[0] === 0 && userTiles[1] === 1) ||
 			 (openTiles[2] !== null && userTiles[0] === 1 && userTiles[1] === 0) ||
 			 (openTiles[2] !== null && userTiles[0] === 5 && userTiles[1] === 8) ||
@@ -152,6 +156,7 @@ function computerWillPlay(){
 
 
 	// second play by computer
+	// TO DO - logic for this and previous set of ruls is conflicting, this does not get run
 	if (turn === 3 && computerNeedsToPlay){
 		// if computer went in center
 		if (computerTiles[0] === 4){
@@ -234,20 +239,42 @@ function computerWillPlay(){
 
 
 
-
-// TO DO AT END
+// TO DO - once logic is working,
 // update symbols to 'x' and 'o' instead of 'u' and 'c'
 
 
 
 
+/* --------------------------------------------------------------
+ALTERNATE GAME LOGIC
+
+Set tiles up so they have properties for beig open/closed and a weighting, like so:
+
+tile1 = {
+	open: true,
+	weight: 0
+}
+
+The first decision is always for the computer to play in the center or a corner.
+
+For all decisions after that:
+- reset weights on tiles to all be zero
+- give a ranking to all tiles based on what turn in the game it is
+	- tiles that lead to a win get a 1
+	- tiles that are neutral get a zero
+	- tiles that lead to a lose get a -1
+
+If tile is open and weight is 1, make that tile the decision tile.
+
+Update board to reflect decision.
 
 
 
+There is likely a way to make this decision for weighting recursivley.
+The way I am describing it here (lines 258 to 263), I would not need to 
+give weights of zero and -1 because I would not end up evaluating those,
+I only am checking for a weight of 1.
 
 
-
-
-
-
+*/
 
