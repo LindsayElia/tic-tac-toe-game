@@ -1,4 +1,37 @@
-.main-content {
-	background-color: lightblue;
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400");
+
+* {
+	box-sizing: border-box;
 }
 
+body {
+	font-family: 'Open Sans', sans-serif;
+}
+
+h1, p {
+	text-align: center;
+}
+
+.game-board {
+	background-color: #F5F5F1; /* off-white */
+	margin: 0 auto;
+	display: flex;
+	flex-wrap: wrap;
+	width: 452px;
+	border: 1px solid black;
+}
+
+.tile {
+	width: 150px;
+	height: 150px;
+}
+
+.column-center {
+	border-left: 1px solid black;
+	border-right: 1px solid black;
+}
+
+.row-center {
+	border-top: 1px solid black;
+	border-bottom: 1px solid black;
+}
