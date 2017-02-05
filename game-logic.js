@@ -275,6 +275,8 @@ The way I am describing it here (lines 258 to 263), I would not need to
 give weights of zero and -1 because I would not end up evaluating those,
 I only am checking for a weight of 1.
 
+A potential drawback for a recursive solution, if it checks all possiblities
+for each round, is that it could have a slower run time / doing more work than needed.
 
 */
 
