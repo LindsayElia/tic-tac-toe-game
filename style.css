@@ -36,8 +36,7 @@ h1, p {
 	border-bottom: 1px solid black;
 }
 
-.user-played,
-.computer-played {
+.played {
 	background-color: #CBD1C7; /* gray-green */
 	font-size: 100px;
 	text-align: center;
