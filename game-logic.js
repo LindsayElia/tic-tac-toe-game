@@ -81,6 +81,8 @@ when computer plays:
 */
 
 function computerWillPlay(){
+	console.log("turn count before computer plays:", turn);
+	var computerNeedsToPlay = true;
 
 	// decide what tile to play on
 
@@ -96,14 +98,56 @@ function computerWillPlay(){
 		}
 	}
 
+	// TO DO - add more of these for when user goes in center
+	// if user has two in a row with the option to win - these options are when computer goes in center first
+	if (turn > 2 && computerNeedsToPlay){
+		if ( (userTiles[0] === 0 && userTiles[1] === 1) ||
+			 (userTiles[0] === 1 && userTiles[1] === 0) ||
+			 (userTiles[0] === 5 && userTiles[1] === 8) ||
+			 (userTiles[0] === 8 && userTiles[1] === 5) ){
+				decision = tile2;
+		}
+		if ( (userTiles[0] === 1 && userTiles[1] === 2) ||
+		 	 (userTiles[0] === 2 && userTiles[1] === 1) ||
+		 	 (userTiles[0] === 6 && userTiles[1] === 3) ||
+		 	 (userTiles[0] === 3 && userTiles[1] === 6) ){
+				decision = tile0;
+		}
+		if ( (userTiles[0] === 0 && userTiles[1] === 3) ||
+			 (userTiles[0] === 3 && userTiles[1] === 0) ||
+			 (userTiles[0] === 7 && userTiles[1] === 8) ||
+			 (userTiles[0] === 8 && userTiles[1] === 7) ){
+				decision = tile6;
+		}
+		if ( (userTiles[0] === 2 && userTiles[1] === 5) ||
+			 (userTiles[0] === 5 && userTiles[1] === 2) ||
+			 (userTiles[0] === 6 && userTiles[1] === 7) ||
+			 (userTiles[0] === 7 && userTiles[1] === 6) ){
+				decision = tile8;
+		}
+		if ( (userTiles[0] === 0 && userTiles[1] === 2) ||
+			 (userTiles[0] === 2 && userTiles[1] === 0) ){
+				decision = tile1;
+		}
+		if ( (userTiles[0] === 0 && userTiles[1] === 6) ||
+			 (userTiles[0] === 6 && userTiles[1] === 0) ){
+				decision = tile3;
+		}
+		if ( (userTiles[0] === 2 && userTiles[1] === 8) ||
+			 (userTiles[0] === 8 && userTiles[1] === 2) ){
+				decision = tile5;
+		}
+		if ( (userTiles[0] === 6 && userTiles[1] === 8) ||
+			 (userTiles[0] === 8 && userTiles[1] === 6) ){
+				decision = tile7;
+		}
 
-	// TO DO - look to see if computer has two in a row with the option to win
-
-	// TO DO - look to see if user has two in a row with the option to win
+		computerNeedsToPlay = false;
+	}
 
 
 	// second play by computer
-	if (turn === 3){
+	if (turn === 3 && computerNeedsToPlay){
 		// if computer went in center
 		if (computerTiles[0] === 4){
 			// and user has played opposite corners
@@ -147,6 +191,8 @@ function computerWillPlay(){
 
 	}
 
+	// TO DO - look to see if computer has two in a row with the option to win
+
 
 
 	// once decision has been made, make changes
@@ -162,7 +208,7 @@ function computerWillPlay(){
 
 	// last thing computer does is update turn play
 	turn += 1;
-	console.log(turn);
+	console.log("turn count after computer plays:", turn);
 }
 
 
